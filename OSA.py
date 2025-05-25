@@ -1,3 +1,6 @@
+from math import ceil
+from textwrap import dedent
+
 alphabet = {
     "h": ("𐩠", "H"),
     "l": ("𐩡", "L"),
@@ -33,11 +36,56 @@ alphabet = {
     "??": ("[ … … ]", "[ … … ]"),
 }
 
-STARTR2L = "\u2069"
-ENDR2L = "\u2067"
+
+def _generate_svg(lines: list) -> str:
+    longest_line = 30
+    for eachline in lines[1:]:
+        linelength = ceil(len(str(eachline)) * 1.2) - 8
+        if linelength > longest_line:
+            longest_line = linelength
+    width = (longest_line * 6) + 60
+    height = 18 + ((len(lines) - 1) * 24)
+    if longest_line == 30:
+        centerline = 115.5
+    else:
+        centerline = width / 2
+    leftx = centerline - 25
+    rightx = centerline + 25
+    svg = dedent(
+        f"""
+        <svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">
+        <style>
+            text {{font-family: "Times New Roman", serif; font-size: 12pt; white-space: pre; fill: white}}
+            .left {{text-anchor: end}}
+            .right {{text-anchor: start}}
+            .header {{font-style: italic}}
+            .linenumber {{font-style: italic; text-anchor: middle}}
+            .transcription {{font-family: sans-serif}}
+            .bracket {{font-size: 16pt; font-weight: 100}}
+        </style>
+        <text class="header left" x="{leftx}" y="12">transcription</text><text class="header right" x="{rightx}" y="12">transliteration</text>
+        """
+    )
+    i = 1
+    for eachline in lines[1:]:
+        y = (i * 24) + 12
+        cleanedleft = (
+            eachline[0]
+            .replace("[", '<tspan class="bracket">[</tspan>')
+            .replace("]", '<tspan class="bracket">]</tspan>')
+        )
+        cleanedright = (
+            eachline[1]
+            .replace("[", '<tspan class="bracket">[</tspan>')
+            .replace("]", '<tspan class="bracket">]</tspan>')
+        )
+        svg += f'<text class="transcription left" x="{leftx}" y="{y}">{cleanedleft}</text><text class="linenumber" x="{centerline}" y="{y}">{i}</text><text class="transliteration right" x="{rightx}" y="{y}">{cleanedright}</text>\n'
+        i += 1
+    svg += "</svg>"
+    return svg
 
 
-def _transcribe_line(line: str, linenum: int) -> str:
+def _transcribe_line(line: str) -> tuple:
     left = []
     right = []
     characters = line.split(" ")
@@ -54,7 +102,7 @@ def _transcribe_line(line: str, linenum: int) -> str:
             right.append(alphabet[each_character][1])
     transcription = f"{' '.join(left)}"
     transliteration = f"{' '.join(right)}"
-    return f"{ENDR2L}{transcription}{STARTR2L}  {linenum}  {transliteration}"
+    return (transcription, transliteration)
 
 
 def _ul(text: str) -> str:
@@ -62,7 +110,7 @@ def _ul(text: str) -> str:
 
 
 def transcribe(text: str = None) -> None:
-    output = ["transcription     transliteration"]
+    lines = [("transcription", "transliteration")]
     if not text:
         print("\n")
         print("-" * 45)
@@ -74,24 +122,24 @@ def transcribe(text: str = None) -> None:
         print("\n- Using character codes above, enter each line")
         print("  of the Musnad text and press return.")
         print("- Append a question mark (?) to the character code")
-        print("  to indicate that the reading is questionable.")
+        print("  to indicate that that character’s reading is unsure.")
         print("- Separate each character code by a single space.")
         print("- Press return twice to output the transcription.\n")
         i = 1
         line = input(f"Line {i}: ").strip()
-        output.append(_transcribe_line(line, i))
+        lines.append(_transcribe_line(line))
         while line != "":
             i += 1
             line = input(f"Line {i}: ").strip()
             if line != "":
-                output.append(_transcribe_line(line, i))
-    print("\nCopy the following into your word processor of choice:\n")
-    longest_line = len(max(output, key=len))
-    for each_formatted_line in output:
-        padding = " " * round((longest_line - len(each_formatted_line)) / 2)
-        print(f"{padding}{each_formatted_line}")
-    print()
+                lines.append(_transcribe_line(line))
+    # print("\nCopy the following into your word processor of choice:\n")
+    print(_generate_svg(lines))
 
 
 if __name__ == "__main__":
     transcribe()
+
+# TODO: save svg file
+# TODO: catch when nothing is entered for line 1
+# TODO: catch when bad characters are entered
