@@ -8,7 +8,7 @@ from tkinter import scrolledtext
 def _generate_svg(lines: list) -> str:
     longest_line = 30
     for eachline in lines[1:]:
-        linelength = ceil(len(str(eachline)) * 1.2) - 8
+        linelength = len(str(eachline)) - 8
         if linelength > longest_line:
             longest_line = linelength
     width = (longest_line * 6) + 60
@@ -16,7 +16,9 @@ def _generate_svg(lines: list) -> str:
     if longest_line == 30:
         centerline = 115.5
     else:
-        centerline = round(width / 2.1)  # centerline isn’t 1/2 because the transliterations are generally slightly wider than the transcriptions
+        centerline = round(
+            width / 2.1
+        )  # centerline isn’t 1/2 because the transliterations are generally slightly wider than the transcriptions
     leftx = centerline - 25
     rightx = centerline + 25
     svg = dedent(
@@ -63,7 +65,12 @@ def _generate_svg(lines: list) -> str:
             message = f"Invalid codes in lines {' and '.join(badcodes)}."
         elif len(badcodes) > 2:
             message = f"Invalid codes in lines {', '.join(badcodes[:-1])}, and {badcodes[-1]}."
-        if not messagebox.askyesno("Invalid Codes", f"{message} Do you still wish to save the SVG file?", icon="warning", parent=window):
+        if not messagebox.askyesno(
+            "Invalid Codes",
+            f"{message} Do you still wish to save the SVG file?",
+            icon="warning",
+            parent=window,
+        ):
             return
     return svg
 
@@ -140,15 +147,21 @@ def transcribe() -> None:
     if len(text) > 0:
         lines = []
         for each_line in text.split("\n"):
-                lines.append(_transcribe_line(each_line.strip()))
+            lines.append(_transcribe_line(each_line.strip()))
         svg = _generate_svg(lines)
         if svg:
-            svg_file = tkinter.filedialog.asksaveasfile(mode='w', defaultextension='svg', filetypes=(('SVG Files', "*.svg"),), title="Save Transcription")
+            svg_file = tkinter.filedialog.asksaveasfile(
+                mode="w",
+                defaultextension="svg",
+                filetypes=(("SVG Files", "*.svg"),),
+                title="Save Transcription",
+            )
             svg_file.write(svg)
             svg_file.close()
     else:
         messagebox.showwarning("No Code", "No code was entered.", parent=window)
     return
+
 
 if __name__ == "__main__":
     window = tkinter.Tk()
@@ -157,16 +170,16 @@ if __name__ == "__main__":
     window.minsize(width=700, height=580)
     table_image = PhotoImage(file="Table.png")
     character_table = tkinter.Label(window, image=table_image)
-    character_table.grid(row=0, column=0, padx=(20,15), pady=(15,0), sticky="ne")
+    character_table.grid(row=0, column=0, padx=(20, 15), pady=(15, 0), sticky="ne")
     code_frame = tkinter.LabelFrame(window, text="Enter Codes")
-    code_frame.grid(row=0, column=1, padx=(15,20), pady=(10,0), sticky="news")
+    code_frame.grid(row=0, column=1, padx=(15, 20), pady=(10, 0), sticky="news")
     code = scrolledtext.ScrolledText(code_frame, font=("Times New Roman", 16))
     code.grid(row=0, column=0, sticky="news")
     code.focus()
     spacer = tkinter.Frame(window)
     spacer.grid(row=1, column=0)
     button = tkinter.Button(window, text="Transcribe", command=transcribe)
-    button.grid(row=1, column=0, columnspan=2, sticky="se", padx=(0,20), pady=(5,15))
+    button.grid(row=1, column=0, columnspan=2, sticky="se", padx=(0, 20), pady=(5, 15))
     window.rowconfigure(0, weight=1)
     window.columnconfigure(0, weight=0)
     window.columnconfigure(1, weight=1)
