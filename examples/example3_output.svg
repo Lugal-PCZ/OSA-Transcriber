@@ -1,0 +1,15 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="66">
+<style>
+    text {font-family: "Times New Roman", serif; font-size: 12pt; white-space: pre; text-anchor: start; fill: black}
+    .header {font-style: italic}
+    .left {text-anchor: end}
+    .transcription {font-family: sans-serif; direction: rtl; unicode-bidi: bidi-override}
+    .linenumber {font-style: italic; text-anchor: middle}
+    .bracket {font-family: "Times New Roman", serif; font-size: 16pt; font-weight: 100}
+    .ltr {text-anchor: end}
+</style>
+<text class="header left" x="90.5" y="12">transcription</text><text class="header" x="140.5" y="12">transliteration</text>
+<text class="transcription" x="90.5" y="36">𐩧 𐩢 𐩣 𐩬 𐩬</text><text class="linenumber" x="115.5" y="36">1</text><text class="transliteration" x="140.5" y="36">R Ḥ M N N</text>
+<text class="transcription ltr" x="-90.5" y="60" transform="scale(-1,1)">𐩧 𐩢 𐩣 𐩬 𐩬</text><text class="linenumber" x="115.5" y="60">2</text><text class="transliteration" x="140.5" y="60">R Ḥ M N N</text>
+</svg>

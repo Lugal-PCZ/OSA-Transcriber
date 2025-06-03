@@ -1,0 +1,19 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="336" height="162">
+<style>
+    text {font-family: "Times New Roman", serif; font-size: 12pt; white-space: pre; text-anchor: start; fill: black}
+    .header {font-style: italic}
+    .left {text-anchor: end}
+    .transcription {font-family: sans-serif; direction: rtl; unicode-bidi: bidi-override}
+    .linenumber {font-style: italic; text-anchor: middle}
+    .bracket {font-family: "Times New Roman", serif; font-size: 16pt; font-weight: 100}
+    .ltr {text-anchor: end}
+</style>
+<text class="header left" x="135" y="12">transcription</text><text class="header" x="185" y="12">transliteration</text>
+<text class="transcription" x="135" y="36">𐩺 𐩧 𐩵 𐩢     𐩣</text><text class="linenumber" x="160" y="36">1</text><text class="transliteration" x="185" y="36">Y R D Ḥ     M</text>
+<text class="transcription" x="135" y="60">𐩧 𐩢 𐩣 𐩬 𐩬</text><text class="linenumber" x="160" y="60">2</text><text class="transliteration" x="185" y="60">R Ḥ M N N</text>
+<text class="transcription" x="135" y="84">𐩹 𐩨 𐩪 𐩣 𐩺 𐩬 𐩽 𐩲 𐩡 𐩺</text><text class="linenumber" x="160" y="84">3</text><text class="transliteration" x="185" y="84">Ḏ B S M Y N    ʿ L Y</text>
+<text class="transcription" x="135" y="108">𐩱 𐩪 𐩵 𐩣     𐩹 𐩠</text><text class="linenumber" x="160" y="108">4</text><text class="transliteration" x="185" y="108">ʾ S D M     Ḏ H</text>
+<text class="transcription" x="135" y="132"><tspan class="bracket">[</tspan> 𐩥 <tspan class="bracket">]</tspan> 𐩡 𐩹 𐩡 𐩣</text><text class="linenumber" x="160" y="132">5</text><text class="transliteration" x="185" y="132"><tspan class="bracket">[</tspan> W <tspan class="bracket">]</tspan> L Ḏ L M</text>
+<text class="transcription" x="135" y="156">𐩠 𐩣 𐩩 𐩲</text><text class="linenumber" x="160" y="156">6</text><text class="transliteration" x="185" y="156">H M T ʿ</text>
+</svg>
