@@ -123,7 +123,7 @@ def _transcribe_line(line: str) -> tuple:
             line = line[1:].strip()
         characters = line.lower().split()
         for each_character in characters:
-            if "?" not in each_character:
+            if (each_character in ("?", "??")) or ("?" not in each_character):
                 try:
                     left.append(alphabet[each_character][0])
                     right.append(alphabet[each_character][1])
