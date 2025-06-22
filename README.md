@@ -11,7 +11,7 @@ The OSA Transcriber is a simple utility for transcribing and transliterating Old
 7. When all codes for the text have been entered, click the “Transcribe” button to export the rendered SVG file.
 
 # Examples
-## Example 1: Graffiti from Wadi Hadramawt, Yemen
+## Example 1: Himyaritic Graffiti from Wadi Hadramawt, Yemen
 _Photograph of Example 1:_  
 ![Photograph of Example 1](examples/example1_photo.jpg)
 
@@ -24,7 +24,7 @@ _Output of Example 1:_
 [SVG of Example 1](examples/example1_output.svg)
 
 
-## Example 2: Inscribed Block from AlUla, Saudi Arabia
+## Example 2: Minaic Inscribed Block from AlUla, Saudi Arabia
 _Photograph of Example 2:_  
 ![Photograph of Example 2](examples/example2_photo.jpg)
 
