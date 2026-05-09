@@ -146,7 +146,7 @@ def transcribe() -> None:
     text = code.get("1.0", tkinter.END).strip()
     if len(text) > 0:
         lines = []
-        for each_line in text.split("\n"):
+        for each_line in text.splitlines():
             lines.append(_transcribe_line(each_line.strip()))
         svg = _generate_svg(lines)
         if svg:
